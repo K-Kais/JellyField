@@ -1,0 +1,976 @@
+fileFormatVersion: 2
+guid: afae16608f0d20a479b063b2570c959b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 47
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 0
+  flipbookColumns: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_0
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 1781
+        width: 540
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9db570c637e3a84b9a617412ec20dd1
+      internalID: 831941281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_1
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 1627
+        width: 300
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2659b04d926b8704bb160edce2beadb5
+      internalID: 882277938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_2
+      rect:
+        serializedVersion: 2
+        x: 1888
+        y: 1940
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b8a14694ef7d64ab3eb5c302e0503e
+      internalID: -483699254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_3
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1104
+        width: 120
+        height: 944
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542414df21a57a8418d4ef6c57ebd299
+      internalID: -1861195765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1796
+        width: 168
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21ca6126474b0154ba60b5d293279bd2
+      internalID: -1746252688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_5
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 1795
+        width: 168
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13894dd2386efaf4586b4076c51ff179
+      internalID: 1297447771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_6
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 1684
+        width: 176
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab2445f822f931946b8ed47018099b86
+      internalID: -7478545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_7
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1720
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2960ec3f64533624fad6c0708382172e
+      internalID: 775422927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_8
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 1668
+        width: 92
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c75cb993e7e62f643a9a5b8176480543
+      internalID: -287440654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_9
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 1670
+        width: 166
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7afa1a610ad23444b8fc8ba9301ae184
+      internalID: 1719940743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_10
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 1470
+        width: 322
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc65063046fbe74282abec8322d21b8
+      internalID: -1994358615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_11
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1474
+        width: 270
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d8dbbe22bc84bd4a9722d6c14e43c2c
+      internalID: -924089771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_12
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 1189
+        width: 252
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6090fd7cce0b15e438b8faae31549e0c
+      internalID: -534112778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_13
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1688
+        width: 15
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b22386ff81afc114eaf56a8348a56f9b
+      internalID: -1677381595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_14
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1203
+        width: 216
+        height: 488
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e123255d9c31f4429c5c6a3ea9abaeb
+      internalID: -921307294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_15
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 1672
+        width: 4
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8990157fe5298c242a3e7528ec8cf7f6
+      internalID: 514601810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1216
+        width: 340
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96f7a4e4a0791624c8f4c1f9427024d5
+      internalID: 2003933303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_17
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 1536
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5c35bef4d2536547b111d26c8d3bda1
+      internalID: 1366478740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_18
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 1387
+        width: 285
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 5, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac1cdad095523954bac043d914a75cf2
+      internalID: 206046629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_19
+      rect:
+        serializedVersion: 2
+        x: 1668
+        y: 1285
+        width: 229
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 849f8325728cf11449bac9f74b9cce3b
+      internalID: -398620321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_20
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1472
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3ee24159c387eb478bff4244f0b45b8
+      internalID: 125856698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_21
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1164
+        width: 364
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beb21462aeb599843b3798c6268117c4
+      internalID: 875907112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_22
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 1448
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc768284a070f7743a355abf88d6811a
+      internalID: -841723598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_23
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 1284
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4fd4091a97089a4fa95f69a50022804
+      internalID: -978890456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_24
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 1096
+        width: 293
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f88b335f915524cbc59c635fed85e1
+      internalID: -2131888983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_25
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 832
+        width: 232
+        height: 475
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf1a484a1b3db44292cf1a4d4153270
+      internalID: -2049965262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1271
+        height: 1163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 298511b9584ae654c91d2bcddf9b69c8
+      internalID: -1263046834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 556
+        width: 199
+        height: 648
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9555d4d82a810947a0078035af0558f
+      internalID: -1830547303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_28
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 844
+        width: 320
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f19c459195fb8488314d2acaf2417d
+      internalID: 1491670451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_29
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 844
+        width: 317
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bb9f4f82a52a944cb33e38fe0a47969
+      internalID: -1099737919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_30
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 744
+        width: 316
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20045afe94dc91147b9613ed44809c64
+      internalID: -857416892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_31
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 952
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9044b4a03cf43e4d9716ab975f1d46f
+      internalID: -1004984591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_32
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 120
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7215be4943c4eb746bc397dc2a7eff3e
+      internalID: -1818494317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_33
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 908
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6a17f3a04796c94488306bb373218e9
+      internalID: 727859214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_34
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 353
+        width: 340
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33ced6aa91252de40943cef1d80d6d84
+      internalID: 1714847843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_35
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 0
+        width: 490
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dd77d0d946570d4f8dd1703096d44c3
+      internalID: -1482427118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_36
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 356
+        width: 247
+        height: 472
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f59d89977bb050349953ed35414f36ed
+      internalID: 920676669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-1-2048x2048-ETC2-Atlas Common-662270f5_37
+      rect:
+        serializedVersion: 2
+        x: 1716
+        y: 0
+        width: 210
+        height: 643
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b655c3ef9b95b34eb1737f7e6ee027e
+      internalID: 947410330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 867fc9fc945538d4ea4ae3ffaa2aa600
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_0: 831941281
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_1: 882277938
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_10: -1994358615
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_11: -924089771
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_12: -534112778
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_13: -1677381595
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_14: -921307294
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_15: 514601810
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_16: 2003933303
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_17: 1366478740
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_18: 206046629
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_19: -398620321
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_2: -483699254
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_20: 125856698
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_21: 875907112
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_22: -841723598
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_23: -978890456
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_24: -2131888983
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_25: -2049965262
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_26: -1263046834
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_27: -1830547303
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_28: 1491670451
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_29: -1099737919
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_3: -1861195765
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_30: -857416892
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_31: -1004984591
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_32: -1818494317
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_33: 727859214
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_34: 1714847843
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_35: -1482427118
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_36: 920676669
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_37: 947410330
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_4: -1746252688
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_5: 1297447771
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_6: -7478545
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_7: 775422927
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_8: -287440654
+      sactx-1-2048x2048-ETC2-Atlas Common-662270f5_9: 1719940743
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
