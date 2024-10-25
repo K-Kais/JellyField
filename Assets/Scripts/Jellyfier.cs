@@ -132,11 +132,11 @@ public class Jellyfier : SerializedMonoBehaviour
             combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
         }
         mesh = new Mesh();
-        mesh.CombineMeshes(combine,false);
+        mesh.CombineMeshes(combine, false);
         meshFilter.mesh = mesh;
         meshRenderer.materials = colors.Select(color =>
         {
-            Material mat = new Material(meshRenderer.material);  // Tạo một material mới cho mỗi phần
+            Material mat = new Material(meshRenderer.material);
             mat.color = color;
             return mat;
         }).ToArray();

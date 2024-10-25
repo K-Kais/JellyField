@@ -1778,6 +1778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeshFilter
       objectReference: {fileID: 0}
+    - target: {fileID: 6143929800969996574, guid: 77e8727f8699f364eaab72c43bd703b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6594015728540137495, guid: 77e8727f8699f364eaab72c43bd703b4, type: 3}
       propertyPath: m_Enabled
       value: 0

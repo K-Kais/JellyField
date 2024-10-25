@@ -4,91 +4,55 @@ using UnityEngine;
 
 public class JellyCell : MonoBehaviour
 {
+    private Jellyfier jellyfier;
+    private Dictionary<JellyCellType, (JellyCellType, JellyCellType, MeshType, MeshType)> adjacentCells;
     public JellyCellType jellyCellType;
     public JellyColor jellyColor;
-    private Jellyfier jellyfier;
     private void Awake()
     {
         jellyfier = GetComponentInParent<Jellyfier>();
+        adjacentCells = new Dictionary<JellyCellType, (JellyCellType, JellyCellType, MeshType, MeshType)>
+        {
+        { JellyCellType.TopLeft, (JellyCellType.TopRight, JellyCellType.DownLeft, MeshType.TopLeftRight, MeshType.LeftTopDown) },
+        { JellyCellType.TopRight, (JellyCellType.TopLeft, JellyCellType.DownRight, MeshType.TopLeftRight, MeshType.RightTopDown) },
+        { JellyCellType.DownLeft, (JellyCellType.TopLeft, JellyCellType.DownRight, MeshType.LeftTopDown, MeshType.DownLeftRight) },
+        { JellyCellType.DownRight, (JellyCellType.TopRight, JellyCellType.DownLeft, MeshType.RightTopDown, MeshType.DownLeftRight) }
+        };
     }
-
-    public MeshType GetMeshCell()
+    public MeshType GetMeshCell() => HandleMeshCell(jellyCellType);
+    private MeshType HandleMeshCell(JellyCellType type)
     {
-        switch (jellyCellType)
+        var (firstNeighbor, secondNeighbor, firstMeshType, secondMeshType) = adjacentCells[type];
+        if (jellyColor == jellyfier.jellyCellDic[firstNeighbor].jellyColor)
         {
-            case JellyCellType.TopLeft: return HandleTopLeft();
-            case JellyCellType.TopRight: return HandleTopRight();
-            case JellyCellType.DownLeft: return HandleDownLeft();
-            case JellyCellType.DownRight: return HandleDownRight();
-            default: throw new System.ArgumentOutOfRangeException();
+            return firstMeshType;
         }
-    }
-    private MeshType HandleTopLeft()
-    {
-        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopRight].jellyColor)
+        else if (jellyColor == jellyfier.jellyCellDic[secondNeighbor].jellyColor)
         {
-            return MeshType.TopLeftRight;
+            return secondMeshType;
         }
-        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownLeft].jellyColor)
+        else
         {
-            return MeshType.LeftTopDown;
+            return type switch
+            {
+                JellyCellType.TopLeft => MeshType.TopLeft,
+                JellyCellType.TopRight => MeshType.TopRight,
+                JellyCellType.DownLeft => MeshType.DownLeft,
+                JellyCellType.DownRight => MeshType.DownRight,
+                _ => throw new System.ArgumentOutOfRangeException()
+            };
         }
-        else return MeshType.TopLeft;
-    }
-
-    private MeshType HandleTopRight()
-    {
-        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopLeft].jellyColor)
-        {
-            return MeshType.TopLeftRight;
-        }
-        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownRight].jellyColor)
-        {
-            return MeshType.RightTopDown;
-        }
-        else return MeshType.TopRight;
-    }
-
-    private MeshType HandleDownLeft()
-    {
-        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopLeft].jellyColor)
-        {
-            return MeshType.LeftTopDown;
-        }
-        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownRight].jellyColor)
-        {
-            return MeshType.DownLeftRight;
-        }
-        else return MeshType.DownLeft;
-    }
-
-    private MeshType HandleDownRight()
-    {
-        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopRight].jellyColor)
-        {
-            return MeshType.RightTopDown;
-        }
-        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownLeft].jellyColor)
-        {
-            return MeshType.DownLeftRight;
-        }
-        else return MeshType.DownRight;
     }
     public Color GetColor()
     {
-        switch (jellyColor)
+        return jellyColor switch
         {
-            case JellyColor.Red:
-                return Color.red;
-            case JellyColor.Blue:
-                return Color.blue;
-            case JellyColor.Yellow:
-                return Color.yellow;
-            case JellyColor.Green:
-                return Color.green;
-            default:
-                return Color.white;
-        }
+            JellyColor.Red => Color.red,
+            JellyColor.Blue => Color.blue,
+            JellyColor.Yellow => Color.yellow,
+            JellyColor.Green => Color.green,
+            _ => Color.white
+        };
     }
 }
 public enum JellyColor
