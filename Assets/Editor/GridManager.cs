@@ -6,7 +6,6 @@ public class GridManager : Editor
 {
     public float PADDING = 1.1f;
     private GridPos[] gridPos;
-    [ContextMenu("Nap to Grid All")]
     private void OnEnable()
     {
         gridPos = FindObjectsOfType<GridPos>();

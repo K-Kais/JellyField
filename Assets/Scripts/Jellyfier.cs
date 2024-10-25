@@ -30,8 +30,12 @@ public class Jellyfier : SerializedMonoBehaviour
     Vector3[] currentVertices;
 
     Vector3[] vertexVelocities;
-
     private void Awake()
+    {
+        AssignRandomColors();
+    }
+
+    private void Start()
     {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
@@ -65,6 +69,33 @@ public class Jellyfier : SerializedMonoBehaviour
     {
         UpdateVertices();
     }
+    private void AssignRandomColors()
+    {
+        List<JellyCell> cells = jellyCellDic.Values.ToList();
+        List<JellyColor> colors = new List<JellyColor>(System.Enum.GetValues(typeof(JellyColor)).Cast<JellyColor>());
+
+        bool isConditionMet = false;
+        while (!isConditionMet)
+        {
+            foreach (var cell in cells)
+            {
+                cell.jellyColor = colors[Random.Range(0, colors.Count)];
+            }
+
+            var distinctColors = cells.Select(cell => cell.jellyColor).Distinct().ToList();
+            if (distinctColors.Count == 1) isConditionMet = true;
+            else if (distinctColors.Count == 4) isConditionMet = true;
+            else if (distinctColors.Count == 2)
+            {
+                int color1Count = cells.Count(cell => cell.jellyColor == distinctColors[0]);
+                int color2Count = cells.Count(cell => cell.jellyColor == distinctColors[1]);
+                if ((color1Count == 2 && color2Count == 2) || (color1Count == 4 || color2Count == 4))
+                {
+                    isConditionMet = true;
+                }
+            }
+        }
+    }
     private void SetMeshFilter()
     {
         var firstCell = jellyCellDic[JellyCellType.TopLeft];
@@ -75,21 +106,29 @@ public class Jellyfier : SerializedMonoBehaviour
             meshRenderer.material.color = firstCell.GetColor();
             mesh = meshFilter.mesh;
             jellyType = JellyType.Base;
+            return;
         }
-        //else if (jellyCells[0].jellyColor == jellyCells[1].jellyColor)
-        //{
-        //    if (jellyCells[2].jellyColor == jellyCells[3].jellyColor)
-        //    {
-        //        //jellyType = JellyType.TwoCells;
-        //        //var count = (int)jellyType;
-        //        //CombineInstance[] combine = new CombineInstance[count];
-        //        //for (int i = 0; i < count; i++)
-        //        //{
-        //        //    combine[i].mesh = meshFilters[i].mesh;
-        //        //    combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-        //        //}
-        //    }
-        //}
+
+        var meshFilters = new List<MeshFilter>();
+        var meshes = new List<MeshType>();
+        foreach (var cell in jellyCellDic)
+        {
+            var meshType = cell.Value.GetMeshCell();
+            if (meshes.Contains(meshType)) continue;
+            meshFilters.Add(jellyMeshFilter.meshDictionary[meshType]);
+            meshes.Add(meshType);
+        }
+        CombineInstance[] combine = new CombineInstance[meshFilters.Count];
+        for (int i = 0; i < meshFilters.Count; i++)
+        {
+            combine[i].mesh = meshFilters[i].mesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+        }
+        mesh = new Mesh();
+        mesh.CombineMeshes(combine);
+        meshFilter.mesh = mesh;
+        meshRenderer.material.color = firstCell.GetColor();
+        jellyType = (JellyType)meshFilters.Count;
     }
     private void UpdateVertices()
     {

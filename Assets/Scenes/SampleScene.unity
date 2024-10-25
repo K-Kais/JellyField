@@ -1658,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jellyCellType: 0
-  jellyColor: 0
+  jellyColor: 1
 --- !u!1 &4529374433784905864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4983749997564855734, guid: 968ba35511addb146a335a69b937197a, type: 3}

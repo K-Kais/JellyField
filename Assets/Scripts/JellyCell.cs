@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +7,72 @@ public class JellyCell : MonoBehaviour
     public JellyCellType jellyCellType;
     public JellyColor jellyColor;
     private Jellyfier jellyfier;
-    private void Start()
+    private void Awake()
     {
         jellyfier = GetComponentInParent<Jellyfier>();
     }
 
-    public void CheckGrid(Vector2Int pos)
+    public MeshType GetMeshCell()
     {
-        if(jellyCellType == JellyCellType.TopLeft)
+        switch (jellyCellType)
         {
-            jellyfier.jellyCellDic.TryGetValue(JellyCellType.TopRight, out JellyCell topRight);
-            jellyfier.jellyCellDic.TryGetValue(JellyCellType.DownLeft, out JellyCell downLeft);
-            jellyfier.jellyCellDic.TryGetValue(JellyCellType.DownRight, out JellyCell downRight);
+            case JellyCellType.TopLeft: return HandleTopLeft();
+            case JellyCellType.TopRight: return HandleTopRight();
+            case JellyCellType.DownLeft: return HandleDownLeft();
+            case JellyCellType.DownRight: return HandleDownRight();
+            default: throw new System.ArgumentOutOfRangeException();
         }
+    }
+    private MeshType HandleTopLeft()
+    {
+        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopRight].jellyColor)
+        {
+            return MeshType.TopLeftRight;
+        }
+        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownLeft].jellyColor)
+        {
+            return MeshType.LeftTopDown;
+        }
+        else return MeshType.TopLeft;
+    }
+
+    private MeshType HandleTopRight()
+    {
+        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopLeft].jellyColor)
+        {
+            return MeshType.TopLeftRight;
+        }
+        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownRight].jellyColor)
+        {
+            return MeshType.RightTopDown;
+        }
+        else return MeshType.TopRight;
+    }
+
+    private MeshType HandleDownLeft()
+    {
+        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopLeft].jellyColor)
+        {
+            return MeshType.LeftTopDown;
+        }
+        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownRight].jellyColor)
+        {
+            return MeshType.DownLeftRight;
+        }
+        else return MeshType.DownLeft;
+    }
+
+    private MeshType HandleDownRight()
+    {
+        if (jellyColor == jellyfier.jellyCellDic[JellyCellType.TopRight].jellyColor)
+        {
+            return MeshType.RightTopDown;
+        }
+        else if (jellyColor == jellyfier.jellyCellDic[JellyCellType.DownLeft].jellyColor)
+        {
+            return MeshType.DownLeftRight;
+        }
+        else return MeshType.DownRight;
     }
     public Color GetColor()
     {
@@ -36,7 +89,7 @@ public class JellyCell : MonoBehaviour
             default:
                 return Color.white;
         }
-    }   
+    }
 }
 public enum JellyColor
 {
