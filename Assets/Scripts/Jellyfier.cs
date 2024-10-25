@@ -14,6 +14,7 @@ public class Jellyfier : SerializedMonoBehaviour
     [SerializeField] private float stiffness;
 
     //We need our Meshfilter to get a hold of the mesh;
+    public JellyState jellyState;
     [SerializeField] private JellyType jellyType;
     [SerializeField] private JellyMeshFilter jellyMeshFilter;
     private MeshFilter meshFilter;
@@ -211,6 +212,17 @@ public class Jellyfier : SerializedMonoBehaviour
         //normalized distance vertex point from earlier
         vertexVelocities[_index] += distanceVerticePoint.normalized * velocity;
     }
+    public void SnapToGrid()
+    {
+        if (GridManager.Instance != null)
+            GridManager.Instance.SnapToGrid(transform);
+    }
+}
+public enum JellyState
+{
+    InGrid,
+    InHand,
+    OutOfGrid,
 }
 public enum JellyType
 {
