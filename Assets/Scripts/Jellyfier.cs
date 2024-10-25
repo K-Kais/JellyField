@@ -89,10 +89,14 @@ public class Jellyfier : SerializedMonoBehaviour
             {
                 int color1Count = cells.Count(cell => cell.jellyColor == distinctColors[0]);
                 int color2Count = cells.Count(cell => cell.jellyColor == distinctColors[1]);
-                if ((color1Count == 2 && color2Count == 2) || (color1Count == 4 || color2Count == 4))
+                if ((color1Count == 2 && color2Count == 2))
                 {
-                    isConditionMet = true;
+                    if (cells[0].jellyColor != cells[3].jellyColor && cells[1].jellyColor != cells[2].jellyColor)
+                    {
+                        isConditionMet = true;
+                    }
                 }
+                else if (color1Count == 4 || color2Count == 4) isConditionMet = true;
             }
         }
     }
@@ -110,12 +114,15 @@ public class Jellyfier : SerializedMonoBehaviour
         }
 
         var meshFilters = new List<MeshFilter>();
+        var colors = new List<Color>();
         var meshes = new List<MeshType>();
         foreach (var cell in jellyCellDic)
         {
             var meshType = cell.Value.GetMeshCell();
             if (meshes.Contains(meshType)) continue;
+
             meshFilters.Add(jellyMeshFilter.meshDictionary[meshType]);
+            colors.Add(cell.Value.GetColor());
             meshes.Add(meshType);
         }
         CombineInstance[] combine = new CombineInstance[meshFilters.Count];
@@ -125,9 +132,14 @@ public class Jellyfier : SerializedMonoBehaviour
             combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
         }
         mesh = new Mesh();
-        mesh.CombineMeshes(combine);
+        mesh.CombineMeshes(combine,false);
         meshFilter.mesh = mesh;
-        meshRenderer.material.color = firstCell.GetColor();
+        meshRenderer.materials = colors.Select(color =>
+        {
+            Material mat = new Material(meshRenderer.material);  // Tạo một material mới cho mỗi phần
+            mat.color = color;
+            return mat;
+        }).ToArray();
         jellyType = (JellyType)meshFilters.Count;
     }
     private void UpdateVertices()
