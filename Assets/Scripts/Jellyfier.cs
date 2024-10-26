@@ -2,6 +2,7 @@
 using Sirenix.Serialization;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Jellyfier : SerializedMonoBehaviour
@@ -16,6 +17,7 @@ public class Jellyfier : SerializedMonoBehaviour
     //We need our Meshfilter to get a hold of the mesh;
     public JellyState jellyState;
     public JellyType jellyType;
+    public List<MeshType> meshTypes;
     [SerializeField] private JellyMeshFilter jellyMeshFilter;
     [SerializeField] private GridCell gridCell;
     private MeshFilter meshFilter;
@@ -96,10 +98,16 @@ public class Jellyfier : SerializedMonoBehaviour
     {
         var firstCell = jellyCellDic[JellyCellType.TopLeft];
         bool allSameColor = jellyCellDic.Skip(1).All(cell => cell.Value.jellyColor == firstCell.jellyColor);
+
         if (allSameColor)
         {
             meshFilter.mesh = jellyMeshFilter.meshDictionary[MeshType.Base].mesh;
-            meshRenderer.material.color = firstCell.GetColor();
+
+            MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+            meshRenderer.GetPropertyBlock(propertyBlock);
+            propertyBlock.SetColor("_Color", firstCell.GetColor());
+            meshRenderer.SetPropertyBlock(propertyBlock);
+
             mesh = meshFilter.mesh;
             jellyType = JellyType.Base;
             return;
@@ -107,15 +115,15 @@ public class Jellyfier : SerializedMonoBehaviour
 
         var meshFilters = new List<MeshFilter>();
         var colors = new List<Color>();
-        var meshes = new List<MeshType>();
+        meshTypes = new List<MeshType>();
         foreach (var cell in jellyCellDic)
         {
             var meshType = cell.Value.GetMeshCell();
-            if (meshes.Contains(meshType)) continue;
+            if (meshTypes.Contains(meshType)) continue;
 
             meshFilters.Add(jellyMeshFilter.meshDictionary[meshType]);
             colors.Add(cell.Value.GetColor());
-            meshes.Add(meshType);
+            meshTypes.Add(meshType);
         }
         CombineInstance[] combine = new CombineInstance[meshFilters.Count];
         for (int i = 0; i < meshFilters.Count; i++)
@@ -207,27 +215,52 @@ public class Jellyfier : SerializedMonoBehaviour
     {
         SetGridCell();
         var jellyToDestroy = new List<GameObject>();
-        foreach (var neighbor in gridCell.neighbors)
+        foreach (var keyValuePair in gridCell.neighbors)
         {
+            var neighbor = keyValuePair.Value;
             if (neighbor.transform.childCount == 0) continue;
+
+            var direction = keyValuePair.Key;
             var jellyfierNeighbor = neighbor.transform.GetComponentInChildren<Jellyfier>();
-            if (jellyType == JellyType.Base && jellyfierNeighbor != null)
+            if (jellyfierNeighbor == null) return;
+
+            if (jellyType == JellyType.Base)
             {
+                var color = jellyCellDic.First().Value.jellyColor;
                 if (jellyfierNeighbor.jellyType == JellyType.Base)
                 {
-                    Debug.Log(jellyfierNeighbor);
-                    var color = jellyCellDic.First().Value.jellyColor;
                     var colorNeighbor = jellyfierNeighbor.jellyCellDic.First().Value.jellyColor;
-                    Debug.Log(color);
-                    Debug.Log(colorNeighbor);
                     if (color != colorNeighbor) continue;
                     else
                     {
-                        Debug.Log(color);
                         jellyToDestroy.Add(jellyfierNeighbor.gameObject);
                         if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
                     }
-                    jellyfierNeighbor.SetMeshFilter();
+                }
+                else if (jellyfierNeighbor.jellyType == JellyType.TwoCells)
+                {
+                    if (jellyfierNeighbor.meshTypes.Contains(MeshType.LeftTopDown))
+                    {
+                        if (direction == GridDirection.Left)
+                        {
+                            if (jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopRight, out JellyCell jellyCell)
+                                && jellyCell.jellyColor != color)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                jellyCell.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.TopLeft].jellyColor;
+                                jellyfierNeighbor.jellyCellDic[JellyCellType.DownRight].jellyColor = jellyCell.jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                        }
+                    }
+                    else if (jellyfierNeighbor.meshTypes.Contains(MeshType.TopLeftRight))
+                    {
+
+                    }
                 }
             }
         }

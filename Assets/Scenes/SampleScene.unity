@@ -251,7 +251,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4087839714048964049}
+    m_TransformParent: {fileID: 3037246396240078460}
     m_Modifications:
     - target: {fileID: 4157757479834220627, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: m_Name
@@ -351,13 +351,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
       value: '"path":"jellyCellDic","value":{"$id":0,"$type":"System.Collections.Generic.Dictionary`2[[JellyCellType,
         Assembly-CSharp],[JellyCell, Assembly-CSharp]], mscorlib","comparer":{"$id":1,"$type":"System.Collections.Generic.EnumEqualityComparer`1[[JellyCellType,
         Assembly-CSharp]], mscorlib","$rlength":0,"$rcontent":[]},"$rlength":4,"$rcontent":[{"$k":0,"$v":$eref:0},{"$k":1,"$v":$eref:1},{"$k":2,"$v":$eref:2},{"$k":3,"$v":$eref:3}]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"jellyCellDic.{0es}","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"jellyCellDic.{1es}","value":$eref:1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"jellyCellDic.{2es}","value":$eref:2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"jellyCellDic.{3es}","value":$eref:3'
       objectReference: {fileID: 0}
     - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
@@ -389,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7885591119112178784, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7885591119112178784, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -648,7 +664,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325971235}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c22ac5582b0f3a145a3ada2eb1efd7da, type: 3}
   m_Name: 
@@ -674,9 +690,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: gridDic
+    - Name: gridCellDic
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Vector2Int, UnityEngine.CoreModule],[GridPos,
+      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Vector2Int, UnityEngine.CoreModule],[GridCell,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -998,7 +1014,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 1
   pos: {x: 0, y: -7}
-  gridNeighbors: []
 --- !u!212 &399411933587391568
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1057,7 +1072,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3037246396240078460}
+    m_TransformParent: {fileID: 4087839714048964049}
     m_Modifications:
     - target: {fileID: 4157757479834220627, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: m_Name
@@ -1157,13 +1172,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
       value: '"path":"jellyCellDic","value":{"$id":0,"$type":"System.Collections.Generic.Dictionary`2[[JellyCellType,
         Assembly-CSharp],[JellyCell, Assembly-CSharp]], mscorlib","comparer":{"$id":1,"$type":"System.Collections.Generic.EnumEqualityComparer`1[[JellyCellType,
         Assembly-CSharp]], mscorlib","$rlength":0,"$rcontent":[]},"$rlength":4,"$rcontent":[{"$k":0,"$v":$eref:0},{"$k":1,"$v":$eref:1},{"$k":2,"$v":$eref:2},{"$k":3,"$v":$eref:3}]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"jellyCellDic.{0es}","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"jellyCellDic.{1es}","value":$eref:1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"jellyCellDic.{2es}","value":$eref:2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"jellyCellDic.{3es}","value":$eref:3'
       objectReference: {fileID: 0}
     - target: {fileID: 6416744756712953307, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
@@ -1195,7 +1226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7885591119112178784, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7885591119112178784, guid: 968ba35511addb146a335a69b937197a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1509,7 +1540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7363338429181234201}
+  - {fileID: 299579046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3639294593839469663 stripped
@@ -1619,7 +1650,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 299579046}
+  - {fileID: 7363338429181234201}
   m_Father: {fileID: 1325971236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4087839714256322237
@@ -2321,9 +2352,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 2, y: 0}
-  gridNeighbors:
-  - {fileID: 7034347506916250289}
-  - {fileID: 7034347507836256599}
 --- !u!1 &5477467429199731144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,9 +2384,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: -2, y: 0}
-  gridNeighbors:
-  - {fileID: 7034347506916250289}
-  - {fileID: 7034347507837852219}
 --- !u!114 &7034347506188456707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2373,10 +2398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 2, y: 4}
-  gridNeighbors:
-  - {fileID: 7034347506743586651}
-  - {fileID: 7034347507006500687}
-  - {fileID: 7034347507836256599}
 --- !u!114 &7034347506403745793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,10 +2412,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 0, y: 6}
-  gridNeighbors:
-  - {fileID: 7034347506705669794}
-  - {fileID: 7034347507006500687}
-  - {fileID: 7034347506743586651}
 --- !u!114 &7034347506705669794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2409,9 +2426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: -2, y: 6}
-  gridNeighbors:
-  - {fileID: 7034347506403745793}
-  - {fileID: 7034347506936016005}
 --- !u!114 &7034347506743586651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2426,11 +2440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 0, y: 4}
-  gridNeighbors:
-  - {fileID: 7034347506936016005}
-  - {fileID: 7034347506188456707}
-  - {fileID: 7034347506403745793}
-  - {fileID: 7034347506951463991}
 --- !u!114 &7034347506916250289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2445,10 +2454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 0, y: 0}
-  gridNeighbors:
-  - {fileID: 7034347506091517118}
-  - {fileID: 5198959048881257009}
-  - {fileID: 7034347506951463991}
 --- !u!114 &7034347506936016005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2463,10 +2468,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: -2, y: 4}
-  gridNeighbors:
-  - {fileID: 7034347506743586651}
-  - {fileID: 7034347506705669794}
-  - {fileID: 7034347507837852219}
 --- !u!114 &7034347506951463991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2481,11 +2482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 0, y: 2}
-  gridNeighbors:
-  - {fileID: 7034347507837852219}
-  - {fileID: 7034347507836256599}
-  - {fileID: 7034347506743586651}
-  - {fileID: 7034347506916250289}
 --- !u!114 &7034347507006500687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,9 +2496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 2, y: 6}
-  gridNeighbors:
-  - {fileID: 7034347506403745793}
-  - {fileID: 7034347506188456707}
 --- !u!114 &7034347507836256599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,10 +2510,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: 2, y: 2}
-  gridNeighbors:
-  - {fileID: 7034347506951463991}
-  - {fileID: 7034347506188456707}
-  - {fileID: 5198959048881257009}
 --- !u!114 &7034347507837852219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2535,10 +2524,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridType: 0
   pos: {x: -2, y: 2}
-  gridNeighbors:
-  - {fileID: 7034347506951463991}
-  - {fileID: 7034347506936016005}
-  - {fileID: 7034347506091517118}
 --- !u!33 &7363338429181234197 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: 3883991963645118230, guid: 968ba35511addb146a335a69b937197a, type: 3}

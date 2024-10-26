@@ -8,16 +8,22 @@ public class GridCell : MonoBehaviour
 {
     public GridType gridType;
     public Vector2Int pos;
-    public List<GridCell> neighbors;
+    public Dictionary<GridDirection, GridCell> neighbors;
     private void Start()
     {
-        neighbors = new List<GridCell>();
-        var directions = new[] { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };
-        for (int i = 0; i < directions.Length; i++)
+        neighbors = new Dictionary<GridDirection, GridCell>();
+        var directions = new Dictionary<GridDirection, Vector2Int>
         {
-            if (GridManager.Instance.gridDic.TryGetValue(pos + directions[i] * 2, out GridCell gridPos))
+            { GridDirection.Left, Vector2Int.left },
+            { GridDirection.Right, Vector2Int.right },
+            { GridDirection.Top, Vector2Int.up },
+            { GridDirection.Down, Vector2Int.down }
+        };
+        foreach (var direction in directions)
+        {
+            if (GridManager.Instance.gridCellDic.TryGetValue(pos + direction.Value * 2, out GridCell gridPos))
             {
-                neighbors.Add(gridPos);
+                neighbors.Add(direction.Key, gridPos);
             }
         }
     }
@@ -33,4 +39,11 @@ public enum GridType
 {
     InGrid,
     OutOfGrid
+}
+public enum GridDirection
+{
+    Left,
+    Right,
+    Top,
+    Down
 }
