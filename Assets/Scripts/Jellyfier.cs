@@ -41,19 +41,7 @@ public class Jellyfier : SerializedMonoBehaviour
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         SetMeshFilter();
-        //var count = (int)jellyType;
-        //CombineInstance[] combine = new CombineInstance[count];
-
-        //for (int i = 0; i < count; i++)
-        //{
-        //    //combine[i].mesh = meshFilters[i].mesh;
-        //    //combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-        //}
-        //mesh = new Mesh();
-        //mesh.CombineMeshes(combine);
-        //GetComponent<MeshFilter>().mesh = mesh;
         //fallForce = Random.Range(25, 80);
-        // meshFilters[0].mesh = mesh;
         //Getting our vertices (initial and their current state(which is initial since we havent done anything yet, duh))
         initialVertices = mesh.vertices;
 
@@ -221,8 +209,8 @@ public class Jellyfier : SerializedMonoBehaviour
 public enum JellyState
 {
     InGrid,
-    InHand,
     OutOfGrid,
+    InHand,
 }
 public enum JellyType
 {

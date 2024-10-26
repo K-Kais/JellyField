@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3964cea5e88fd24aa8236c986de143a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridType: 0
   pos: {x: 0, y: 0}
-  data: 
