@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -101,8 +102,7 @@ public class Jellyfier : SerializedMonoBehaviour
 
         if (allSameColor)
         {
-            meshFilter.mesh = jellyMeshFilter.meshDictionary[MeshType.Base].mesh;
-
+            StartCoroutine(AssignMeshCoroutine());
             MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
             meshRenderer.GetPropertyBlock(propertyBlock);
             propertyBlock.SetColor("_Color", firstCell.GetColor());
@@ -141,6 +141,11 @@ public class Jellyfier : SerializedMonoBehaviour
             return mat;
         }).ToArray();
         jellyType = (JellyType)meshFilters.Count;
+    }
+    private IEnumerator AssignMeshCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        meshFilter.mesh = jellyMeshFilter.meshDictionary[MeshType.Base].mesh;
     }
     private void UpdateVertices()
     {
