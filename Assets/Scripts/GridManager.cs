@@ -6,15 +6,15 @@ using UnityEngine;
 public class GridManager : SerializedMonoBehaviour
 {
     public static GridManager Instance;
-    private GridPos[] gridPos;
+    private GridCell[] gridPos;
     [DictionaryDrawerSettings(KeyLabel = "Pos", ValueLabel = "Grid")]
-    public Dictionary<Vector2Int, GridPos> gridDic;
+    public Dictionary<Vector2Int, GridCell> gridDic;
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        gridPos = FindObjectsOfType<GridPos>();
+        gridPos = FindObjectsOfType<GridCell>();
         foreach (var grid in gridPos)
         {
             if (grid.gridType == GridType.InGrid)

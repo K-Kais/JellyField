@@ -15,8 +15,9 @@ public class Jellyfier : SerializedMonoBehaviour
 
     //We need our Meshfilter to get a hold of the mesh;
     public JellyState jellyState;
-    [SerializeField] private JellyType jellyType;
+    public JellyType jellyType;
     [SerializeField] private JellyMeshFilter jellyMeshFilter;
+    [SerializeField] private GridCell gridCell;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Mesh mesh;
@@ -41,6 +42,7 @@ public class Jellyfier : SerializedMonoBehaviour
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         SetMeshFilter();
+        SetGridCell();
         //fallForce = Random.Range(25, 80);
         //Getting our vertices (initial and their current state(which is initial since we havent done anything yet, duh))
         initialVertices = mesh.vertices;
@@ -89,6 +91,7 @@ public class Jellyfier : SerializedMonoBehaviour
             }
         }
     }
+    private void SetGridCell() => gridCell = transform.GetComponentInParent<GridCell>();
     private void SetMeshFilter()
     {
         var firstCell = jellyCellDic[JellyCellType.TopLeft];
@@ -199,6 +202,37 @@ public class Jellyfier : SerializedMonoBehaviour
         //Our velocity now still needs a direction, we can calculate this using the
         //normalized distance vertex point from earlier
         vertexVelocities[_index] += distanceVerticePoint.normalized * velocity;
+    }
+    public void Combine()
+    {
+        SetGridCell();
+        var jellyToDestroy = new List<GameObject>();
+        foreach (var neighbor in gridCell.neighbors)
+        {
+            if (neighbor.transform.childCount == 0) continue;
+            var jellyfierNeighbor = neighbor.transform.GetComponentInChildren<Jellyfier>();
+            if (jellyType == JellyType.Base && jellyfierNeighbor != null)
+            {
+                if (jellyfierNeighbor.jellyType == JellyType.Base)
+                {
+                    Debug.Log(jellyfierNeighbor);
+                    var color = jellyCellDic.First().Value.jellyColor;
+                    var colorNeighbor = jellyfierNeighbor.jellyCellDic.First().Value.jellyColor;
+                    Debug.Log(color);
+                    Debug.Log(colorNeighbor);
+                    if (color != colorNeighbor) continue;
+                    else
+                    {
+                        Debug.Log(color);
+                        jellyToDestroy.Add(jellyfierNeighbor.gameObject);
+                        if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                    }
+                    jellyfierNeighbor.SetMeshFilter();
+                }
+            }
+        }
+        foreach (var jelly in jellyToDestroy) if (jelly != gameObject) Destroy(jelly);
+        if (jellyToDestroy.Contains(gameObject)) Destroy(gameObject);
     }
     public void SnapToGrid()
     {

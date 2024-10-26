@@ -4,20 +4,20 @@ using UnityEngine;
 using System.Linq;
 using Sirenix.OdinInspector;
 [ExecuteInEditMode]
-public class GridPos : MonoBehaviour
+public class GridCell : MonoBehaviour
 {
     public GridType gridType;
     public Vector2Int pos;
-    public List<GridPos> gridNeighbors;
+    public List<GridCell> neighbors;
     private void Start()
     {
-        gridNeighbors = new List<GridPos>();
+        neighbors = new List<GridCell>();
         var directions = new[] { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };
         for (int i = 0; i < directions.Length; i++)
         {
-            if (GridManager.Instance.gridDic.TryGetValue(pos + directions[i] * 2, out GridPos gridPos))
+            if (GridManager.Instance.gridDic.TryGetValue(pos + directions[i] * 2, out GridCell gridPos))
             {
-                gridNeighbors.Add(gridPos);
+                neighbors.Add(gridPos);
             }
         }
     }

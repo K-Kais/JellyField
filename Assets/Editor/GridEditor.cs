@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Linq;
 using UnityEditor;
-[CustomEditor(typeof(GridPos))]
+[CustomEditor(typeof(GridCell))]
 public class GridEditor : Editor
 {
     public float PADDING = 1.1f;
-    private GridPos[] gridPos;
+    private GridCell[] gridPos;
     private Jellyfier[] jellyfiers;
     private void OnEnable()
     {
-        gridPos = FindObjectsOfType<GridPos>();
+        gridPos = FindObjectsOfType<GridCell>();
         jellyfiers = FindObjectsOfType<Jellyfier>();
     }
     private void OnSceneGUI()

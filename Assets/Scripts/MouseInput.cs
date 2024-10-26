@@ -9,7 +9,7 @@ public class MouseInput : MonoBehaviour
     private Ray mouseRay;
     private RaycastHit raycastHit;
     private Vector2 offset;
-    private Transform jelly;
+    private Jellyfier jellyfier;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -17,28 +17,28 @@ public class MouseInput : MonoBehaviour
             mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(mouseRay, out raycastHit))
             {
-                Jellyfier jellyfier = raycastHit.collider.GetComponent<Jellyfier>();
-                jelly = raycastHit.collider.transform;
+                jellyfier = raycastHit.collider.GetComponent<Jellyfier>();
                 if (jellyfier != null)
                 {
                     Vector3 inputPoint = raycastHit.point + (raycastHit.normal * pressureOffset);
                     jellyfier.ApplyPressureToPoint(inputPoint, pressureForce);
-                    offset = jelly.position - raycastHit.point;
+                    offset = jellyfier.transform.position - raycastHit.point;
                     offset += Vector2.up * 1.5f;
                 }
             }
         }
-        if (Input.GetMouseButton(0) && jelly != null)
+        if (Input.GetMouseButton(0) && jellyfier != null)
         {
             Vector2 newMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            jelly.position = newMousePos + offset;
+            jellyfier.transform.position = newMousePos + offset;
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (jelly != null)
+            if (jellyfier != null)
             {
-                GridManager.Instance.SnapToGrid(jelly);
-                jelly = null;
+                GridManager.Instance.SnapToGrid(jellyfier.transform);
+                jellyfier.Combine();
+                jellyfier = null;
             }
         }
     }
