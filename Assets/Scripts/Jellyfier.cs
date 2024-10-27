@@ -433,16 +433,102 @@ public class Jellyfier : SerializedMonoBehaviour
                 {
                     if (neighborDirection == GridDirection.Left)
                     {
-                        if (jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopRight, out JellyCell TopRight)
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopRight, out JellyCell TopRight);
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.DownRight, out JellyCell DownRight);
+                        if (TopRight.jellyColor != baseColor
+                            && DownRight.jellyColor != baseColor)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (TopRight.jellyColor == baseColor)
+                            {
+                                TopRight.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.TopLeft].jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                            else if (DownRight.jellyColor == baseColor)
+                            {
+                                DownRight.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.DownLeft].jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                        }
+                    }
+                    else if (neighborDirection == GridDirection.Right)
+                    {
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopLeft, out JellyCell TopLeft);
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.DownLeft, out JellyCell DownLeft);
+                        if (TopLeft.jellyColor != baseColor
+                            && DownLeft.jellyColor != baseColor)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (TopLeft.jellyColor == baseColor)
+                            {
+                                TopLeft.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.TopRight].jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                            else if (DownLeft.jellyColor == baseColor)
+                            {
+                                DownLeft.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.DownRight].jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                        }
+                    }
+                    else if (neighborDirection == GridDirection.Top)
+                    {
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.DownLeft, out JellyCell DownLeft);
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.DownRight, out JellyCell DownRight);
+                        if (DownLeft.jellyColor != baseColor
+                            && DownRight.jellyColor != baseColor)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (DownLeft.jellyColor == baseColor)
+                            {
+                                DownLeft.jellyColor = DownRight.jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                            else if (DownRight.jellyColor == baseColor)
+                            {
+                                DownRight.jellyColor = DownLeft.jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                        }
+                    }
+                    else if (neighborDirection == GridDirection.Down)
+                    {
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopLeft, out JellyCell TopLeft);
+                        jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopRight, out JellyCell TopRight);
+                        if (TopLeft.jellyColor != baseColor
                             && TopRight.jellyColor != baseColor)
                         {
                             continue;
                         }
                         else
                         {
-                            TopRight.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.TopLeft].jellyColor;
-                            jellyfierNeighbor.SetMeshFilter();
-                            if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            if (TopLeft.jellyColor == baseColor)
+                            {
+                                TopLeft.jellyColor = TopRight.jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
+                            else if (TopRight.jellyColor == baseColor)
+                            {
+                                TopRight.jellyColor = TopLeft.jellyColor;
+                                jellyfierNeighbor.SetMeshFilter();
+                                if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
+                            }
                         }
                     }
                 }
