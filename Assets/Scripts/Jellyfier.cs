@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Jellyfier : SerializedMonoBehaviour
 {
@@ -47,16 +48,7 @@ public class Jellyfier : SerializedMonoBehaviour
         SetMeshFilter();
         SetGridCell();
         //fallForce = Random.Range(25, 80);
-        //Getting our vertices (initial and their current state(which is initial since we havent done anything yet, duh))
-        initialVertices = mesh.vertices;
-
-        //Obviously we are never changing the actual count of vertices so these two Arrays will always have the same length
-        currentVertices = new Vector3[initialVertices.Length];
-        vertexVelocities = new Vector3[initialVertices.Length];
-        for (int i = 0; i < initialVertices.Length; i++)
-        {
-            currentVertices[i] = initialVertices[i];
-        }
+        RecalculateMesh();
     }
 
     private void Update()
@@ -99,20 +91,22 @@ public class Jellyfier : SerializedMonoBehaviour
     {
         var firstCell = jellyCellDic[JellyCellType.TopLeft];
         bool allSameColor = jellyCellDic.Skip(1).All(cell => cell.Value.jellyColor == firstCell.jellyColor);
+        var newMesh = new Mesh();
 
         if (allSameColor)
         {
-            StartCoroutine(AssignMeshCoroutine());
+            newMesh = jellyMeshFilter.meshDictionary[MeshType.Base].mesh;
+            meshFilter.mesh = newMesh;
+            mesh = newMesh;
+            RecalculateMesh();
+
             MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
             meshRenderer.GetPropertyBlock(propertyBlock);
             propertyBlock.SetColor("_Color", firstCell.GetColor());
             meshRenderer.SetPropertyBlock(propertyBlock);
-
-            mesh = meshFilter.mesh;
             jellyType = JellyType.Base;
             return;
         }
-
         var meshFilters = new List<MeshFilter>();
         var colors = new List<Color>();
         meshTypes = new List<MeshType>();
@@ -131,9 +125,11 @@ public class Jellyfier : SerializedMonoBehaviour
             combine[i].mesh = meshFilters[i].mesh;
             combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
         }
-        mesh = new Mesh();
-        mesh.CombineMeshes(combine, false);
-        meshFilter.mesh = mesh;
+        newMesh.CombineMeshes(combine, false);
+        meshFilter.mesh = newMesh;
+        mesh = newMesh;
+        RecalculateMesh();
+
         meshRenderer.materials = colors.Select(color =>
         {
             Material mat = new Material(meshRenderer.material);
@@ -142,11 +138,25 @@ public class Jellyfier : SerializedMonoBehaviour
         }).ToArray();
         jellyType = (JellyType)meshFilters.Count;
     }
-    private IEnumerator AssignMeshCoroutine()
+
+    private void RecalculateMesh()
     {
-        yield return new WaitForEndOfFrame();
-        meshFilter.mesh = jellyMeshFilter.meshDictionary[MeshType.Base].mesh;
+        //Getting our vertices (initial and their current state(which is initial since we havent done anything yet, duh))
+        initialVertices = mesh.vertices;
+
+        //Obviously we are never changing the actual count of vertices so these two Arrays will always have the same length
+        currentVertices = new Vector3[initialVertices.Length];
+        vertexVelocities = new Vector3[initialVertices.Length];
+        for (int i = 0; i < initialVertices.Length; i++)
+        {
+            currentVertices[i] = initialVertices[i];
+        }
+        mesh.vertices = currentVertices;
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
     }
+
     private void UpdateVertices()
     {
         //We are looping through every vertice  update them depending on their velocity.
@@ -416,6 +426,23 @@ public class Jellyfier : SerializedMonoBehaviour
                                 jellyfierNeighbor.SetMeshFilter();
                                 if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
                             }
+                        }
+                    }
+                }
+                else if (jellyfierNeighbor.jellyType == JellyType.FourCells)
+                {
+                    if (neighborDirection == GridDirection.Left)
+                    {
+                        if (jellyfierNeighbor.jellyCellDic.TryGetValue(JellyCellType.TopRight, out JellyCell TopRight)
+                            && TopRight.jellyColor != baseColor)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            TopRight.jellyColor = jellyfierNeighbor.jellyCellDic[JellyCellType.TopLeft].jellyColor;
+                            jellyfierNeighbor.SetMeshFilter();
+                            if (!jellyToDestroy.Contains(gameObject)) jellyToDestroy.Add(gameObject);
                         }
                     }
                 }
