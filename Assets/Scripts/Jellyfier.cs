@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ public class Jellyfier : SerializedMonoBehaviour
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Mesh mesh;
+
 
     [DictionaryDrawerSettings(KeyLabel = "Cell Type", ValueLabel = "Jelly Cell")]
     public Dictionary<JellyCellType, JellyCell> jellyCellDic;
@@ -65,13 +67,13 @@ public class Jellyfier : SerializedMonoBehaviour
         {
             foreach (var cell in cells)
             {
-                cell.jellyColor = colors[Random.Range(0, colors.Count)];
+                cell.jellyColor = colors[UnityEngine.Random.Range(0, colors.Count)];
             }
 
             var distinctColors = cells.Select(cell => cell.jellyColor).Distinct().ToList();
             if (distinctColors.Count == 1) isConditionMet = true;
-            //else if (distinctColors.Count == 3) isConditionMet = true;
-            //else if (distinctColors.Count == 4) isConditionMet = true;
+            else if (distinctColors.Count == 3) isConditionMet = true;
+            else if (distinctColors.Count == 4) isConditionMet = true;
             else if (distinctColors.Count == 2)
             {
                 int color1Count = cells.Count(cell => cell.jellyColor == distinctColors[0]);
@@ -227,7 +229,7 @@ public class Jellyfier : SerializedMonoBehaviour
         //normalized distance vertex point from earlier
         vertexVelocities[_index] += distanceVerticePoint.normalized * velocity;
     }
-    public void Combine()
+    public void Combine1()
     {
         SetGridCell();
         var jellyToDestroy = new List<GameObject>();
@@ -921,11 +923,118 @@ public class Jellyfier : SerializedMonoBehaviour
                         }
                     }
                 }
+                else if (jellyfierNeighbor.jellyType == JellyType.TwoCells)
+                {
+                    if (meshTypes.Contains(MeshType.LeftTopDown) && jellyfierNeighbor.meshTypes.Contains(MeshType.LeftTopDown))
+                    {
+
+                    }
+                }
             }
         }
         foreach (var jelly in jellyToDestroy) if (jelly != gameObject) Destroy(jelly);
         if (jellyToDestroy.Contains(gameObject)) Destroy(gameObject);
     }
+    public void Combine()
+    {
+        SetGridCell();
+        var jellyToCombine = new Dictionary<GridCell, JellyCell>();
+        var jellyGrid = new List<JellyCell>();
+
+        foreach (var keyValuePair in gridCell.neighbors)
+        {
+            var neighbor = keyValuePair.Value;
+            if (neighbor.transform.childCount == 0) continue;
+
+            var direction = keyValuePair.Key;
+            var jellyfierNeighbor = neighbor.transform.GetComponentInChildren<Jellyfier>();
+            if (direction == GridDirection.Left)
+            {
+                jellyGrid = new List<JellyCell>();
+                jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
+                jellyGrid.AddRange(jellyCellDic.Values);
+                JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
+                jellyCombineGrid.InitializeGrid(jellyGrid);
+
+                var leftResults = jellyCombineGrid.GetResults();
+                if (leftResults != null)
+                {
+                    foreach (var jelly in leftResults)
+                    {
+                        Debug.Log(jelly.jellyColor);
+                    }
+                }
+                continue;
+            }
+            else if (direction == GridDirection.Right)
+            {
+                jellyGrid = new List<JellyCell>();
+                jellyGrid.AddRange(jellyCellDic.Values);
+                jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
+                JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
+                jellyCombineGrid.InitializeGrid(jellyGrid);
+
+                var leftResults = jellyCombineGrid.GetResults();
+                if (leftResults != null)
+                {
+                    foreach (var jelly in leftResults)
+                    {
+                        Debug.Log(jelly.jellyColor);
+                    }
+                }
+                continue;
+            }
+        }
+
+
+
+
+        //foreach (var keyValuePair in gridCell.neighbors)
+        //{
+        //    var neighbor = keyValuePair.Value;
+        //    if (neighbor.transform.childCount == 0) continue;
+
+        //    var jellyfierNeighbor = neighbor.transform.GetComponentInChildren<Jellyfier>();
+        //    foreach (var jelly in jellyfierNeighbor.jellyCellDic)
+        //    {
+        //        jellyToCombine.Add(neighbor, jelly.Value);
+        //    }
+        //}
+
+        //var distinctColors = jellyCellDic.Values.Select(cell => cell.jellyColor).Distinct().ToList();
+        //var jellyColorDirections = new Dictionary<GridDirection, JellyCell>();
+        //foreach (var jelly in jellyToCombine)
+        //{
+        //    distinctColors.Select(color =>
+        //    {
+        //        if (jelly.Value.jellyColor == color)
+        //        {
+        //            var direction = jelly.Key.neighbors.First().Key;
+        //            jellyColorDirections.Add(direction, jelly.Value);
+        //        }
+        //        return color;
+        //    });
+        //}
+
+        //var jellyNexToColors = new List<JellyCell>();
+        //foreach (var jelly in jellyColorDirections)
+        //{
+        //    if (jellyType == JellyType.Base)
+        //    {
+        //        if (jelly.Key == GridDirection.Left)
+        //        {
+        //            jellyColorDirections.TryGetValue(GridDirection.Left, out JellyCell leftJelly);
+        //        }
+        //    }
+        //}
+
+        //var jellyToDestroys = new List<GameObject>();
+        //foreach (var jelly in jellyNexToColors)
+        //{
+
+        //}
+    }
+
     public void SnapToGrid()
     {
         if (GridManager.Instance != null)
@@ -956,4 +1065,201 @@ public enum MeshType
     DownLeftRight,
     LeftTopDown,
     RightTopDown,
+}
+
+public class JellyCombineGrid
+{
+    private JellyCell[,] gridLeftRight = new JellyCell[2, 4];
+    private JellyCell[,] gridTopDown = new JellyCell[4, 2];
+    private List<JellyCell> results;
+
+    public void InitializeGrid(List<JellyCell> jellyCells)
+    {
+        gridLeftRight[0, 0] = jellyCells[0];
+        gridLeftRight[0, 1] = jellyCells[1];
+        gridLeftRight[1, 0] = jellyCells[2];
+        gridLeftRight[1, 1] = jellyCells[3];
+
+        gridLeftRight[0, 2] = jellyCells[4];
+        gridLeftRight[0, 3] = jellyCells[5];
+        gridLeftRight[1, 2] = jellyCells[6];
+        gridLeftRight[1, 3] = jellyCells[7];
+    }
+    public List<JellyCell> GetResults()
+    {
+        if (!NextTo()) return null;
+
+        results.AddRange(gridLeftRight);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return results;
+
+        if (Square()) return results;
+        else if (LTopLeft()) return results;
+        else if (LTopRight()) return results;
+        else if (LDownLeft()) return results;
+        else if (LDownRight()) return results;
+        else if (HorizontalTop()) return results;
+        else if (HorizontalDown()) return results;
+        else if (NextTo()) return results;
+
+        return null;
+    }
+    public bool Square()
+    {
+        results = new List<JellyCell>
+        {
+           gridLeftRight[0, 0],gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3],
+           gridLeftRight[1, 0], gridLeftRight[1, 1]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+           gridLeftRight[0, 1],gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3],
+                                                     gridLeftRight[1, 2], gridLeftRight[1, 3]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+           gridLeftRight[0, 0],gridLeftRight[0, 1], gridLeftRight[0, 2],
+           gridLeftRight[1, 0], gridLeftRight[1, 1], gridLeftRight[1, 2]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        var temp = results[5];
+        results.RemoveAt(5);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.Add(temp);
+        results.RemoveAt(2);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+          gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3],
+          gridLeftRight[1, 1], gridLeftRight[1, 2], gridLeftRight[1, 3]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        temp = results[3];
+        results.RemoveAt(3);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.Add(temp);
+        results.RemoveAt(0);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+            gridLeftRight[0, 1], gridLeftRight[0, 2],
+            gridLeftRight[1, 1], gridLeftRight[1, 2]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
+
+    private bool NextTo()
+    {
+        results = new List<JellyCell>
+        {
+            gridLeftRight[0, 1], gridLeftRight[0, 2],
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+            gridLeftRight[1, 1], gridLeftRight[1, 2]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.Clear();
+        return false;
+    }
+
+    public bool HorizontalTop()
+    {
+        results = new List<JellyCell>
+        {
+            gridLeftRight[0, 0], gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        var temp = results[3];
+        results.RemoveAt(3);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.Add(temp);
+        results.RemoveAt(0);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
+    public bool HorizontalDown()
+    {
+        results = new List<JellyCell>
+        {
+            gridLeftRight[1, 0], gridLeftRight[1, 1], gridLeftRight[1, 2], gridLeftRight[1, 3]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        var temp = results[3];
+        results.RemoveAt(3);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.Add(temp);
+        results.RemoveAt(0);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
+    public bool LTopLeft()
+    {
+        results = new List<JellyCell>
+        {
+            gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3],
+            gridLeftRight[1, 1],
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.RemoveAt(2);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
+    public bool LTopRight()
+    {
+        results = new List<JellyCell>
+        {
+            gridLeftRight[0, 0],gridLeftRight[0, 1], gridLeftRight[0, 2],
+                                                     gridLeftRight[1, 2],
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.RemoveAt(0);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
+    public bool LDownLeft()
+    {
+        results = new List<JellyCell>
+        {
+            gridLeftRight[0, 1],
+            gridLeftRight[1, 1], gridLeftRight[1, 2], gridLeftRight[1, 3]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.RemoveAt(3);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
+    public bool LDownRight()
+    {
+        results = new List<JellyCell>
+        {
+                                                     gridLeftRight[0, 2],
+            gridLeftRight[1, 0],gridLeftRight[1, 1], gridLeftRight[1, 2],
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results.RemoveAt(1);
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+        return false;
+    }
 }
