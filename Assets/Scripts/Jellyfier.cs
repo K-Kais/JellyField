@@ -954,7 +954,7 @@ public class Jellyfier : SerializedMonoBehaviour
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 jellyGrid.AddRange(jellyCellDic.Values);
                 JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
-                jellyCombineGrid.InitializeGrid(jellyGrid);
+                jellyCombineGrid.InitializeLeftRight(jellyGrid);
 
                 var leftResults = jellyCombineGrid.GetResults();
                 if (leftResults != null)
@@ -972,7 +972,43 @@ public class Jellyfier : SerializedMonoBehaviour
                 jellyGrid.AddRange(jellyCellDic.Values);
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
-                jellyCombineGrid.InitializeGrid(jellyGrid);
+                jellyCombineGrid.InitializeLeftRight(jellyGrid);
+
+                var leftResults = jellyCombineGrid.GetResults();
+                if (leftResults != null)
+                {
+                    foreach (var jelly in leftResults)
+                    {
+                        Debug.Log(jelly.jellyColor);
+                    }
+                }
+                continue;
+            }
+            else if (direction == GridDirection.Top)
+            {
+                jellyGrid = new List<JellyCell>();
+                jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
+                jellyGrid.AddRange(jellyCellDic.Values);
+                JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
+                jellyCombineGrid.InitializeTopDown(jellyGrid);
+
+                var leftResults = jellyCombineGrid.GetResults();
+                if (leftResults != null)
+                {
+                    foreach (var jelly in leftResults)
+                    {
+                        Debug.Log(jelly.jellyColor);
+                    }
+                }
+                continue;
+            }
+            else if (direction == GridDirection.Down)
+            {
+                jellyGrid = new List<JellyCell>();
+                jellyGrid.AddRange(jellyCellDic.Values);
+                jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
+                JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
+                jellyCombineGrid.InitializeTopDown(jellyGrid);
 
                 var leftResults = jellyCombineGrid.GetResults();
                 if (leftResults != null)
@@ -1073,7 +1109,7 @@ public class JellyCombineGrid
     private JellyCell[,] gridTopDown = new JellyCell[4, 2];
     private List<JellyCell> results;
 
-    public void InitializeGrid(List<JellyCell> jellyCells)
+    public void InitializeLeftRight(List<JellyCell> jellyCells)
     {
         gridLeftRight[0, 0] = jellyCells[0];
         gridLeftRight[0, 1] = jellyCells[1];
@@ -1084,6 +1120,18 @@ public class JellyCombineGrid
         gridLeftRight[0, 3] = jellyCells[5];
         gridLeftRight[1, 2] = jellyCells[6];
         gridLeftRight[1, 3] = jellyCells[7];
+    }
+    public void InitializeTopDown(List<JellyCell> jellyCells)
+    {
+        gridLeftRight[0, 0] = jellyCells[1];
+        gridLeftRight[0, 1] = jellyCells[3];
+        gridLeftRight[1, 0] = jellyCells[0];
+        gridLeftRight[1, 1] = jellyCells[2];
+
+        gridLeftRight[0, 2] = jellyCells[5];
+        gridLeftRight[0, 3] = jellyCells[7];
+        gridLeftRight[1, 2] = jellyCells[4];
+        gridLeftRight[1, 3] = jellyCells[6];
     }
     public List<JellyCell> GetResults()
     {
@@ -1114,8 +1162,22 @@ public class JellyCombineGrid
 
         results = new List<JellyCell>
         {
-           gridLeftRight[0, 1],gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3],
-                                                     gridLeftRight[1, 2], gridLeftRight[1, 3]
+           gridLeftRight[0, 0],gridLeftRight[0, 1], 
+           gridLeftRight[1, 0], gridLeftRight[1, 1], gridLeftRight[1, 2], gridLeftRight[1, 3],
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+           gridLeftRight[0, 0],gridLeftRight[0, 1], gridLeftRight[0, 2], gridLeftRight[0, 3],
+                                                    gridLeftRight[1, 2], gridLeftRight[1, 3]
+        };
+        if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
+
+        results = new List<JellyCell>
+        {
+                                                     gridLeftRight[0, 2], gridLeftRight[0, 3],
+            gridLeftRight[1, 0],gridLeftRight[1, 1], gridLeftRight[1, 2], gridLeftRight[1, 3]
         };
         if (results.Select(cell => cell.jellyColor).Distinct().ToArray().Length == 1) return true;
 
