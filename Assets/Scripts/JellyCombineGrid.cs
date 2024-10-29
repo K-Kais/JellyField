@@ -33,7 +33,7 @@ public class JellyCombineGrid
         foreach (var check in checks) if (check()) return results;
         return null;
     }
-    private bool IsUniformColor(List<JellyCell> cells) => cells.Select(cell => cell.jellyColor).Distinct().Count() == 1;
+    private bool IsUniformColor(List<JellyCell> cells) => cells.Select(cell => cell.color).Distinct().Count() == 1;
     private bool Square()
     {
         results = new List<JellyCell>

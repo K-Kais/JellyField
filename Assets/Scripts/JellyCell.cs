@@ -6,8 +6,9 @@ public class JellyCell : MonoBehaviour
 {
     private Jellyfier jellyfier;
     private Dictionary<JellyCellType, (JellyCellType, JellyCellType, MeshType, MeshType)> adjacentCells;
-    public JellyCellType jellyCellType;
-    public JellyColor jellyColor;
+    private Dictionary<JellyCellType, Vector2Int> positions;
+    public JellyCellType type;
+    public JellyColor color;
     private void Awake()
     {
         jellyfier = GetComponentInParent<Jellyfier>();
@@ -18,16 +19,24 @@ public class JellyCell : MonoBehaviour
         { JellyCellType.DownLeft, (JellyCellType.TopLeft, JellyCellType.DownRight, MeshType.LeftTopDown, MeshType.DownLeftRight) },
         { JellyCellType.DownRight, (JellyCellType.TopRight, JellyCellType.DownLeft, MeshType.RightTopDown, MeshType.DownLeftRight) }
         };
+
+        positions = new Dictionary<JellyCellType, Vector2Int>
+        {
+            { JellyCellType.TopLeft, new Vector2Int(0, 0) },
+            { JellyCellType.TopRight, new Vector2Int(1, 0) },
+            { JellyCellType.DownLeft, new Vector2Int(0, 1) },
+            { JellyCellType.DownRight, new Vector2Int(1, 1) }
+        };
     }
-    public MeshType GetMeshCell() => HandleMeshCell(jellyCellType);
+    public MeshType GetMeshCell() => HandleMeshCell(type);
     private MeshType HandleMeshCell(JellyCellType type)
     {
         var (firstNeighbor, secondNeighbor, firstMeshType, secondMeshType) = adjacentCells[type];
-        if (jellyColor == jellyfier.jellyCellDic[firstNeighbor].jellyColor)
+        if (color == jellyfier.jellyCellDic[firstNeighbor].color)
         {
             return firstMeshType;
         }
-        else if (jellyColor == jellyfier.jellyCellDic[secondNeighbor].jellyColor)
+        else if (color == jellyfier.jellyCellDic[secondNeighbor].color)
         {
             return secondMeshType;
         }
@@ -45,7 +54,7 @@ public class JellyCell : MonoBehaviour
     }
     public Color GetColor()
     {
-        return jellyColor switch
+        return color switch
         {
             JellyColor.Red => Color.red,
             JellyColor.Blue => Color.blue,
@@ -53,6 +62,10 @@ public class JellyCell : MonoBehaviour
             JellyColor.Green => Color.green,
             _ => Color.white
         };
+    }
+    public bool IsDiagonal(JellyCellType targetCell)
+    {
+        return positions[type].x != positions[targetCell].x && positions[type].y != positions[targetCell].y;
     }
 }
 public enum JellyColor

@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 3
-  jellyColor: 0
+  type: 3
+  color: 0
 --- !u!4 &299579046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7885591119112178784, guid: 968ba35511addb146a335a69b937197a, type: 3}
@@ -716,8 +716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 1
-  jellyColor: 0
+  type: 1
+  color: 0
 --- !u!1 &1325971235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,8 +1190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 0
-  jellyColor: 0
+  type: 0
+  color: 0
 --- !u!1 &2059390477 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4983749997564855734, guid: 968ba35511addb146a335a69b937197a, type: 3}
@@ -1209,8 +1209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 2
-  jellyColor: 0
+  type: 2
+  color: 0
 --- !u!114 &367634015187734800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1752,8 +1752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 3
-  jellyColor: 0
+  type: 3
+  color: 0
 --- !u!4 &3037246396240078460
 Transform:
   m_ObjectHideFlags: 0
@@ -1787,8 +1787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 0
-  jellyColor: 0
+  type: 0
+  color: 0
 --- !u!4 &4087839713194675165
 Transform:
   m_ObjectHideFlags: 0
@@ -1972,8 +1972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 2
-  jellyColor: 0
+  type: 2
+  color: 0
 --- !u!1 &4693819334367828826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6151902953633737864, guid: 968ba35511addb146a335a69b937197a, type: 3}
@@ -1991,8 +1991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e120a18ece6a554899fba2abdd3546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyCellType: 1
-  jellyColor: 0
+  type: 1
+  color: 0
 --- !u!212 &4713726042729254833
 SpriteRenderer:
   m_ObjectHideFlags: 0
