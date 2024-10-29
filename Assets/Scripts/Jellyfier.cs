@@ -60,14 +60,14 @@ public class Jellyfier : SerializedMonoBehaviour
         bool isConditionMet = false;
         while (!isConditionMet)
         {
-            foreach (var cell in cells)
-            {
-                cell.color = colors[Random.Range(0, colors.Count)];
-            }
+            foreach (var cell in cells) cell.color = colors[Random.Range(0, colors.Count)];
 
             var distinctColors = cells.Select(cell => cell.color).Distinct().ToList();
             if (distinctColors.Count == 1) isConditionMet = true;
-            else if (distinctColors.Count == 3) isConditionMet = true;
+            else if (distinctColors.Count == 3)
+            {
+                if (cells[0].color != cells[3].color && cells[1].color != cells[2].color) isConditionMet = true;
+            }
             else if (distinctColors.Count == 4) isConditionMet = true;
             else if (distinctColors.Count == 2)
             {
@@ -228,8 +228,9 @@ public class Jellyfier : SerializedMonoBehaviour
     {
         SetGridCell();
         var jellyToCombine = new List<JellyCell>();
+        var jellyCombineGrid = new JellyCombineGrid();
         var jellyGrid = new List<JellyCell>();
-        JellyCombineGrid jellyCombineGrid = new JellyCombineGrid();
+        var results = new List<JellyCell>();
 
         foreach (var keyValuePair in gridCell.neighbors)
         {
@@ -245,7 +246,7 @@ public class Jellyfier : SerializedMonoBehaviour
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 jellyGrid.AddRange(jellyCellDic.Values);
                 jellyCombineGrid.InitializeLeftRight(jellyGrid);
-                var results = jellyCombineGrid.GetResults();
+                results = jellyCombineGrid.GetResults();
                 if (results != null)
                 {
                     jellyToCombine.AddRange(results);
@@ -261,7 +262,7 @@ public class Jellyfier : SerializedMonoBehaviour
                 jellyGrid.AddRange(jellyCellDic.Values);
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 jellyCombineGrid.InitializeLeftRight(jellyGrid);
-                var results = jellyCombineGrid.GetResults();
+                results = jellyCombineGrid.GetResults();
                 if (results != null)
                 {
                     jellyToCombine.AddRange(results);
@@ -277,7 +278,7 @@ public class Jellyfier : SerializedMonoBehaviour
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 jellyGrid.AddRange(jellyCellDic.Values);
                 jellyCombineGrid.InitializeTopDown(jellyGrid);
-                var results = jellyCombineGrid.GetResults();
+                results = jellyCombineGrid.GetResults();
                 if (results != null)
                 {
                     jellyToCombine.AddRange(results);
@@ -294,7 +295,7 @@ public class Jellyfier : SerializedMonoBehaviour
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
 
                 jellyCombineGrid.InitializeTopDown(jellyGrid);
-                var results = jellyCombineGrid.GetResults();
+                results = jellyCombineGrid.GetResults();
                 if (results != null)
                 {
                     jellyToCombine.AddRange(results);
@@ -304,6 +305,7 @@ public class Jellyfier : SerializedMonoBehaviour
                 }
             }
         }
+        if(results != null) Combine();
     }
     private void JellyDestroyAll(Jellyfier neighbor)
     {
