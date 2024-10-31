@@ -8,6 +8,7 @@ public class MouseInput : MonoBehaviour
     [SerializeField] private float pressureOffset;
     private Ray mouseRay;
     private RaycastHit raycastHit;
+    private Vector3 inputPoint;
     private Vector2 offset;
     private Jellyfier jellyfier;
     private void Update()
@@ -20,7 +21,7 @@ public class MouseInput : MonoBehaviour
                 jellyfier = raycastHit.collider.GetComponent<Jellyfier>();
                 if (jellyfier != null)
                 {
-                    Vector3 inputPoint = raycastHit.point + (raycastHit.normal * pressureOffset);
+                    inputPoint = raycastHit.point + (raycastHit.normal * pressureOffset);
                     jellyfier.ApplyPressureToPoint(inputPoint, pressureForce);
                     offset = jellyfier.transform.position - raycastHit.point;
                     offset += Vector2.up * 1.5f;
@@ -36,6 +37,7 @@ public class MouseInput : MonoBehaviour
         {
             if (jellyfier != null)
             {
+                jellyfier.ApplyPressureToPoint(inputPoint, pressureForce);
                 GridManager.Instance.SnapToGrid(jellyfier.transform);
                 jellyfier.Combine();
                 jellyfier = null;

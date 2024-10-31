@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class Jellyfier : SerializedMonoBehaviour
     public List<MeshType> meshTypes;
     [SerializeField] private JellyMeshFilter jellyMeshFilter;
     [SerializeField] private GridCell gridCell;
+    [SerializeField] private Jellyfier jellyfierNeighbor;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Mesh mesh;
@@ -94,6 +96,7 @@ public class Jellyfier : SerializedMonoBehaviour
         if (allSameColor)
         {
             newMesh = jellyMeshFilter.meshDictionary[MeshType.Base].mesh;
+            if (newMesh == null) return;
             meshFilter.mesh = newMesh;
             mesh = newMesh;
             RecalculateMesh();
@@ -231,6 +234,7 @@ public class Jellyfier : SerializedMonoBehaviour
         var jellyCombineGrid = new JellyCombineGrid();
         var jellyGrid = new List<JellyCell>();
         var results = new List<JellyCell>();
+        results = null;
 
         foreach (var keyValuePair in gridCell.neighbors)
         {
@@ -238,10 +242,10 @@ public class Jellyfier : SerializedMonoBehaviour
             if (neighbor.transform.childCount == 0) continue;
 
             var direction = keyValuePair.Key;
-            var jellyfierNeighbor = neighbor.transform.GetComponentInChildren<Jellyfier>();
+            jellyfierNeighbor = neighbor.transform.GetComponentInChildren<Jellyfier>();
             if (direction == GridDirection.Left)
             {
-                JellyDestroyAll(jellyfierNeighbor);
+                if (JellyDestroyAll(jellyfierNeighbor)) return;
                 jellyGrid = new List<JellyCell>();
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 jellyGrid.AddRange(jellyCellDic.Values);
@@ -251,13 +255,11 @@ public class Jellyfier : SerializedMonoBehaviour
                 {
                     jellyToCombine.AddRange(results);
                     JellyToDestroys(results);
-                    jellyfierNeighbor.SetMeshFilter();
-                    SetMeshFilter();
                 }
             }
             else if (direction == GridDirection.Right)
             {
-                JellyDestroyAll(jellyfierNeighbor);
+                if (JellyDestroyAll(jellyfierNeighbor)) return;
                 jellyGrid = new List<JellyCell>();
                 jellyGrid.AddRange(jellyCellDic.Values);
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
@@ -267,13 +269,11 @@ public class Jellyfier : SerializedMonoBehaviour
                 {
                     jellyToCombine.AddRange(results);
                     JellyToDestroys(results);
-                    jellyfierNeighbor.SetMeshFilter();
-                    SetMeshFilter();
                 }
             }
             else if (direction == GridDirection.Top)
             {
-                JellyDestroyAll(jellyfierNeighbor);
+                if (JellyDestroyAll(jellyfierNeighbor)) return;
                 jellyGrid = new List<JellyCell>();
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
                 jellyGrid.AddRange(jellyCellDic.Values);
@@ -283,13 +283,11 @@ public class Jellyfier : SerializedMonoBehaviour
                 {
                     jellyToCombine.AddRange(results);
                     JellyToDestroys(results);
-                    jellyfierNeighbor.SetMeshFilter();
-                    SetMeshFilter();
                 }
             }
             else if (direction == GridDirection.Down)
             {
-                JellyDestroyAll(jellyfierNeighbor);
+                if (JellyDestroyAll(jellyfierNeighbor)) return;
                 jellyGrid = new List<JellyCell>();
                 jellyGrid.AddRange(jellyCellDic.Values);
                 jellyGrid.AddRange(jellyfierNeighbor.jellyCellDic.Values);
@@ -300,24 +298,25 @@ public class Jellyfier : SerializedMonoBehaviour
                 {
                     jellyToCombine.AddRange(results);
                     JellyToDestroys(results);
-                    jellyfierNeighbor.SetMeshFilter();
-                    SetMeshFilter();
                 }
             }
         }
-        if(results != null) Combine();
     }
-    private void JellyDestroyAll(Jellyfier neighbor)
+    private bool JellyDestroyAll(Jellyfier neighbor)
     {
         var jellyfiers = new List<JellyCell>();
         jellyfiers.AddRange(neighbor.jellyCellDic.Values);
         jellyfiers.AddRange(jellyCellDic.Values);
 
-        if (jellyfiers.Select(cell => cell.color).Distinct().Count() == 1)
+        if (jellyfiers.Select(cell => cell.color).Distinct().Count() == 1 && jellyfiers.Count > 4)
         {
-            Destroy(neighbor.gameObject);
-            Destroy(gameObject);
+            var jellyToDestroys = new List<GameObject>();
+            jellyToDestroys.Add(neighbor.gameObject);
+            jellyToDestroys.Add(gameObject);
+            StartCoroutine(DelayDestroy(jellyToDestroys));
+            return true;
         }
+        return false;
     }
     private void JellyToDestroys(List<JellyCell> jellyCells)
     {
@@ -352,7 +351,10 @@ public class Jellyfier : SerializedMonoBehaviour
                 {
                     int count = cells.Count(jelly => jelly.color == cell.color);
                     if (count == 1 && !jellyCellFirst.IsDiagonal(cell.type))
-                    { jellyCellFirst.color = cell.color; break; }
+                    {
+                        StartCoroutine(DelayCombineColor(cell, jellyCellFirst, null));
+                        break;
+                    }
                 }
             }
             else if (jellyCellList.Count == 2)
@@ -370,19 +372,36 @@ public class Jellyfier : SerializedMonoBehaviour
                     int count = cells.Count(jelly => jelly.color == cell.color);
                     if (count == 1)
                     {
-                        if (!jellyCellFirst.IsDiagonal(cell.type)) jellyCellFirst.color = cell.color;
-                        else if (!jellyCellSecond.IsDiagonal(cell.type)) jellyCellSecond.color = cell.color;
+                        if (!jellyCellFirst.IsDiagonal(cell.type)) StartCoroutine(DelayCombineColor(cell, jellyCellFirst, null));
+                        else if (!jellyCellSecond.IsDiagonal(cell.type)) StartCoroutine(DelayCombineColor(cell, null, jellyCellSecond));
                         continue;
                     }
                     else if (count == 2)
                     {
-                        jellyCellFirst.color = cell.color;
-                        jellyCellSecond.color = cell.color;
+                        StartCoroutine(DelayCombineColor(cell, jellyCellFirst, jellyCellSecond));
                         break;
                     }
                 }
             }
         }
+        StartCoroutine(DelayDestroy(jellyToDestroys));
+    }
+
+    private IEnumerator DelayCombineColor(JellyCell cell, JellyCell jellyCellFirst, JellyCell jellyCellSecond)
+    {
+        var neighbor = jellyfierNeighbor;
+        yield return new WaitForSeconds(1f);
+        if (jellyCellFirst != null) jellyCellFirst.color = cell.color;
+        if (jellyCellSecond != null) jellyCellSecond.color = cell.color;
+
+        neighbor.SetMeshFilter();
+        SetMeshFilter();
+        Combine();
+    }
+
+    private IEnumerator DelayDestroy(List<GameObject> jellyToDestroys)
+    {
+        yield return new WaitForSeconds(1f);
         foreach (var jelly in jellyToDestroys) Destroy(jelly);
     }
     public void SnapToGrid()
